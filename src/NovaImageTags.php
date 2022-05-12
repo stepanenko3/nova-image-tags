@@ -56,17 +56,7 @@ class NovaImageTags extends Field
             ->withMeta([
                 'imageAttribute' => $attribute,
             ])
-            ->dependsOn(
-                ['image'],
-                function (NovaImageTags $field, NovaRequest $request, FormData $formData) use ($attribute) {
-                    if (!$formData->{$attribute})
-                        return;
-
-                    $field->withMeta([
-                        'imageField' => $formData->{$attribute},
-                    ]);
-                },
-            );
+            ->dependsOn('image', fn () => null);
     }
 
     public function minRows($minRows = null)

@@ -35,6 +35,7 @@
                 v-for="(element, i) in rows"
                 :key="element[0].attribute"
                 class="flex flex-col mt-3 border border-gray-200 dark:border-gray-900 dark:bg-gray-900 relative rounded-lg"
+                style="margin-left: 42px"
             >
                 <div
                     class="absolute py-2 px-1 flex flex-col mr-3 border border-gray-200 dark:border-gray-900 dark:bg-gray-900 rounded-lg"
@@ -64,7 +65,6 @@
                     :unique-id="getUniqueId(field, rowField)"
                     class="mr-3"
                     @change="changeField($event.target.value, i, j)"
-                    full-width-content
                 />
             </div>
         </template>
@@ -132,11 +132,11 @@
                 this.loading = true;
                 this.loadingError = false;
 
-                this.toDataURL(this.currentField.imageField)
+                this.toDataURL(this.currentField.dependsOn[this.currentField.imageAttribute])
                     .then(dataUrl => {
                         if (dataUrl && dataUrl.indexOf('image/') !== -1) {
                             this.loadingError = false;
-                            this.image = this.currentField.imageField
+                            this.image = this.currentField.dependsOn[this.currentField.imageAttribute]
                         } else {
                             this.loadingError = true;
                             this.image = null;
