@@ -132,11 +132,11 @@
                 this.loading = true;
                 this.loadingError = false;
 
-                this.toDataURL(this.currentField.dependsOn[this.currentField.imageAttribute])
+                this.toDataURL(this.currentField.image)
                     .then(dataUrl => {
                         if (dataUrl && dataUrl.indexOf('image/') !== -1) {
                             this.loadingError = false;
-                            this.image = this.currentField.dependsOn[this.currentField.imageAttribute]
+                            this.image = this.currentField.image
                         } else {
                             this.loadingError = true;
                             this.image = null;

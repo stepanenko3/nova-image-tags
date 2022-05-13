@@ -50,13 +50,26 @@ class NovaImageTags extends Field
         ], $fields));
     }
 
-    public function image($attribute)
+    public function image($attribute, $value, $formatter = null)
     {
+        if (is_callable($formatter)) {
+            $value = call_user_func($formatter, $value);
+        }
+
         return $this
-            ->withMeta([
-                'imageAttribute' => $attribute,
-            ])
-            ->dependsOn('image', fn () => null);
+            ->withMeta(['image' => $value])
+            ->dependsOn(
+                $attribute,
+                function (NovaImageTags $field, NovaRequest $request, FormData $formData) use($attribute, $formatter) {
+                    $value = $formData->{$attribute};
+
+                    if (is_callable($formatter)) {
+                        $value = call_user_func($formatter, $value);
+                    }
+
+                    $field->withMeta(['image' => $value]);
+                },
+            );
     }
 
     public function minRows($minRows = null)

@@ -1,11 +1,11 @@
 <template>
     <PanelItem :index="index" :field="field">
         <template #value>
-            <div class="relative block">
+            <div v-if="field.image" class="relative block">
                 <img
                     class="rounded-lg block w-full"
                     ref="picture"
-                    :src="resource.fields.filter(f => f.attribute === field.imageAttribute)[0].value"
+                    :src="field.image"
                 >
 
                 <div
@@ -18,6 +18,9 @@
                     }"
                 ></div>
             </div>
+            <template v-else>
+                -
+            </template>
         </template>
     </PanelItem>
 </template>
