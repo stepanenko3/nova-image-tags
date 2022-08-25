@@ -21,7 +21,7 @@
 Via Composer
 
 ``` bash
-$ composer require stepanenko3/nova-image-targs
+$ composer require stepanenko3/nova-image-tags
 ```
 
 ## Minimum requirements
